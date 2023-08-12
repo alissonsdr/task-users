@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <form  onsubmit="saveUser()" class="form" id="form">
+    <form  onsubmit="verifyPass(); saveUser()" class="form" id="form">
 
         <div class="title">Usuários</div>
 
@@ -35,7 +35,6 @@
                 <div class="adjust-inputs visibility" id="inputPass">
                     <label for="pass">Senha</label>
                     <input id="pass" type="password" class="inputs-form" minlength="3">
-                    <!-- Tornar a senha requerida -->
                 </div>
             </div>
 

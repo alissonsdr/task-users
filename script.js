@@ -61,22 +61,25 @@ function saveUser() {
 function verifyRole() {
     let role = document.getElementById("role")
     let roleValue = role.value
-    let pass = document.getElementById("pass").value
-    let passConfirm = document.getElementById("passConfirm").value
+    let pass = document.getElementById("pass")
+    let passConfirm = document.getElementById("passConfirm")
 
 
     if (roleValue == "Admin") {
         form.style.height = "430px"
         inputPass.style.visibility = 'visible'
         inputPassConfirm.style.visibility = 'visible'
+        pass.setAttribute('required', 'true')
+        passConfirm.setAttribute('required', 'true')
     } else {
         form.style.height = "400px"
         inputPass.style.visibility = 'hidden'
         inputPassConfirm.style.visibility = 'hidden'
+        pass.removeAttribute('required')
+        passConfirm.removeAttribute('required')
     }
 
-    pass.setAttribute('required')
-    passConfirm.setAttribute('required')
+
 }
 
 function verifyPass() {
@@ -199,20 +202,4 @@ function getRoles() {
         }
     ]
     return roles
-}
-
-function validate(){
-    let name = document.getElementById("name")
-    let age = document.getElementById("age")
-
-    if (name.value === ""){
-        name.style.borderColor= "red"
-    }
-    if (age.value === ""){
-        age.style.borderColor= "red"
-        return false
-    }
-
-    return true
-
 }
