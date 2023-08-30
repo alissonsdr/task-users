@@ -7,12 +7,12 @@ let countId = usersList[usersList.length - 1].id
 let list = ''
 
 usersList.map(user => {
-    list += `<tr>
+    list += `<tr class="lines">
      <td>${user.name}</td>
      <td>${user.nickname}</td>
      <td>${user.age}</td>
      <td>${user.role}</td>
-     <td><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''} disabled></input></td>
+     <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
      </tr>`
 })
 
@@ -42,12 +42,12 @@ function saveUser() {
     let list = ''
 
     usersList.map(user => {
-        list += `<tr>
+        list += `<tr class="lines">
      <td>${user.name}</td>
      <td>${user.nickname}</td>
      <td>${user.age}</td>
      <td>${user.role}</td>
-     <td><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''} disabled></input></td>
+     <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
      </tr>`
     })
 
@@ -97,6 +97,74 @@ function verifyPass() {
 
 }
 
+function filter() {
+    let filter = document.getElementById("filter").value
+
+    if (filter == "Ativo"){
+
+        console.log(filter)
+
+        let usersActive = usersList.filter(status => status.status == "Ativo")
+
+        contentTable.innerHTML = ""
+        list = ""
+
+        usersActive.forEach(user => {
+            list += `<tr class="lines">
+         <td>${user.name}</td>
+         <td>${user.nickname}</td>
+         <td>${user.age}</td>
+         <td>${user.role}</td>
+         <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
+         </tr>`
+        })
+    
+        contentTable.innerHTML = list
+        
+    } else if (filter == "Inativo"){
+
+        console.log(filter)
+
+        let usersInactive = usersList.filter(status => status.status == "Inativo")
+
+        contentTable.innerHTML = ""
+        list = ""
+
+        usersInactive.forEach(user => {
+            list += `<tr class="lines">
+            <td>${user.name}</td>
+            <td>${user.nickname}</td>
+            <td>${user.age}</td>
+            <td>${user.role}</td>
+            <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
+            </tr>`
+        })
+
+        contentTable.innerHTML = list
+
+    } else if (filter == "Todos") {
+
+        console.log(filter)
+
+        contentTable.innerHTML = ""
+        list = ""
+
+        usersList.forEach(user => {
+            list += `<tr class="lines">
+            <td>${user.name}</td>
+            <td>${user.nickname}</td>
+            <td>${user.age}</td>
+            <td>${user.role}</td>
+            <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
+            </tr>`
+        })
+
+        contentTable.innerHTML = list
+
+    }
+
+}
+
 function getUsers() {
     let users = [
         {
@@ -129,7 +197,7 @@ function getUsers() {
             nickname: "Gica",
             age: 25,
             role: "Suporte",
-            status: "Ativo"
+            status: "Inativo"
         },
         {
             id: 5,
@@ -161,7 +229,7 @@ function getUsers() {
             nickname: "Larissa",
             age: 25,
             role: "Suporte",
-            status: "Ativo"
+            status: "Inativo"
         },
         {
             id: 9,

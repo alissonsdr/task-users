@@ -14,83 +14,91 @@
 </head>
 
 <body>
-    <form  onsubmit="verifyPass(); saveUser()" class="form" id="form">
+    <div class="boards-adjust">
+        <form onsubmit="verifyPass(); saveUser()" class="left" id="form">
 
-        <div class="title">Usuários</div>
+            <div class="title">Usuários</div>
 
-        <div class="boards">
-            <div class="board-left margin">
-                <div class="adjust-inputs">
-                    <label for="name" class="labels-form">Nome</label>
-                    <input type="text" class="inputs-form" id="name" required>
+            <div class="boards">
+                <div class="board-left margin">
+                    <div class="adjust-inputs">
+                        <label for="name" class="labels-form">Nome</label>
+                        <input type="text" class="inputs-form" id="name" required>
+                    </div>
+                    <div class="adjust-inputs">
+                        <label for="nickname" class="labels-form">Apelido</label>
+                        <input type="text" class="inputs-form" id="nickname">
+                    </div>
+                    <div class="adjust-inputs">
+                        <label for="age" class="labels-form">Idade</label>
+                        <input type="number" class="inputs-form" id="age" required>
+                    </div>
+                    <div class="adjust-inputs visibility" id="inputPass">
+                        <label for="pass">Senha</label>
+                        <input id="pass" type="password" class="inputs-form" minlength="3">
+                    </div>
                 </div>
-                <div class="adjust-inputs">
-                    <label for="nickname" class="labels-form">Apelido</label>
-                    <input type="text" class="inputs-form" id="nickname">
-                </div>
-                <div class="adjust-inputs">
-                    <label for="age" class="labels-form">Idade</label>
-                    <input type="number" class="inputs-form" id="age" required>
-                </div>
-                <div class="adjust-inputs visibility" id="inputPass">
-                    <label for="pass">Senha</label>
-                    <input id="pass" type="password" class="inputs-form" minlength="3">
+
+                <div class="board-right margin">
+                    <div class="adjust-label">
+                        <label for="role">Função</label>
+                        <select class="status" name="role" id="role" onchange="verifyRole()">
+                            <option value="Admin">Admin</option>
+                            <option value="Suporte" selected>Suporte</option>
+                            <option value="Estagiário">Estagiário</option>
+                        </select>
+                    </div>
+                    <div class="adjust-label">
+                        <label for="status">Situação</label>
+                        <select class="status" name="status" id="status">
+                            <option value="Ativo" selected>Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                        </select>
+                    </div>
+                    <button class="button" type="submit">
+                        + Incluir
+                    </button>
+                    <div class=" adjust-inputs visibility" id="inputPassConfirm">
+                        <label for="pass">Confirmar senha</label>
+                        <input id="passConfirm" type="password" class="inputs-form" minlength="3">
+                    </div>
                 </div>
             </div>
+            <div class="error-pass visibility" id="errorPass">As senhas não conferem.</div>
+        </form>
 
-            <div class="board-right margin">
-                <div class="adjust-label">
-                    <label for="role">Função</label>
-                    <select class="status" name="role" id="role" onchange="verifyRole()">
-                        <option value="Admin">Admin</option>
-                        <option value="Suporte" selected>Suporte</option>
-                        <option value="Estagiário">Estagiário</option>
-                    </select>
-                </div>
-                <div class="adjust-label">
-                    <label for="status">Situação</label>
-                    <select class="status" name="status" id="status">
-                        <option value="Ativo" selected>Ativo</option>
-                        <option value="Inativo">Inativo</option>
-                    </select>
-                </div>
-                <button class="button" type="submit">
-                    + Incluir
-                </button>
-                <div class=" adjust-inputs visibility" id="inputPassConfirm">
-                    <label for="pass">Confirmar senha</label>
-                    <input id="passConfirm" type="password" class="inputs-form" minlength="3">
-                </div>
-            </div>
+        <div class="right">
+            <div class="box-filter">Filtro</div>
+            <select class="filter" name="filter" id="filter" onchange="filter()">
+                <option value="Todos">Todos</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+            </select>
+
+            <table class="table">
+                <thead class="header">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Apelido</th>
+                        <th>Idade</th>
+                        <th>Função</th>
+                        <th>Situação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTable">
+
+                </tbody>
+            </table>
         </div>
-        <div class="error-pass visibility" id="errorPass">As senhas não conferem.</div>
-    </form>
+    </div>
 
-    <div class="box-filter">Filtro</div>
-    <select class="filter" name="filter" id="filter">
-        <option value="Todos">Todos</option>
-        <option value="Ativo">Ativo</option>
-        <option value="Inativo">Inativo</option>
-    </select>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Apelido</th>
-                <th>Idade</th>
-                <th>Função</th>
-                <th>Situação</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody id="contentTable">
-
-        </tbody>
-    </table>
 
 
     <script src="script.js"></script>
 </body>
 
 </html>
+
+
