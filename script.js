@@ -115,7 +115,6 @@ function verifyRole() {
     let pass = document.getElementById("pass")
     let passConfirm = document.getElementById("passConfirm")
 
-
     if (roleValue == "Admin") {
         // form.style.height = "430px"
         inputPass.style.visibility = 'visible'
@@ -137,66 +136,24 @@ function verifyRole() {
 function filter() {
     let filter = document.getElementById("filter").value
 
-    if (filter == "Ativo") {
+    switch (filter){
 
-        console.log(filter)
+        case "Ativo":
+            let usersActive = usersList.filter(status => status.status == "Ativo")
+            contentTable.innerHTML = ""
+            createComponent(usersActive)
+            break
 
-        let usersActive = usersList.filter(status => status.status == "Ativo")
+        case "Inativo":
+            let usersInactive = usersList.filter(status => status.status == "Inativo")
+            contentTable.innerHTML = ""
+            createComponent(usersInactive)
+            break
 
-        contentTable.innerHTML = ""
-        list = ""
-
-        usersActive.forEach(user => {
-            list += `<tr class="lines">
-         <td>${user.name}</td>
-         <td>${user.nickname}</td>
-         <td>${user.age}</td>
-         <td>${user.role}</td>
-         <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
-         </tr>`
-        })
-
-        contentTable.innerHTML = list
-
-    } else if (filter == "Inativo") {
-
-        console.log(filter)
-
-        let usersInactive = usersList.filter(status => status.status == "Inativo")
-
-        contentTable.innerHTML = ""
-        list = ""
-
-        usersInactive.forEach(user => {
-            list += `<tr class="lines">
-            <td>${user.name}</td>
-            <td>${user.nickname}</td>
-            <td>${user.age}</td>
-            <td>${user.role}</td>
-            <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
-            </tr>`
-        })
-
-        contentTable.innerHTML = list
-
-    } else if (filter == "Todos") {
-
-        console.log(filter)
-
-        contentTable.innerHTML = ""
-        list = ""
-
-        usersList.forEach(user => {
-            list += `<tr class="lines">
-            <td>${user.name}</td>
-            <td>${user.nickname}</td>
-            <td>${user.age}</td>
-            <td>${user.role}</td>
-            <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
-            </tr>`
-        })
-
-        contentTable.innerHTML = list
+        case "Todos":
+            contentTable.innerHTML = ""
+            createComponent(usersList)
+            break
 
     }
 
