@@ -21,7 +21,7 @@ body {
     display: flex;
     font-family: 'Poppins';
     width: 520px;
-    height: 400px;
+    height: 450px;
     border: solid 1px;
     border-radius: 15px;
     border-color: rgba(255, 255, 255, 0.336);
@@ -50,7 +50,7 @@ body {
     background-color: rgb(39, 39, 42);
     color: white;
     border-radius: 10px;
-    width: 200px;
+    width: 190px;
     height: 35px;
     font-size: 15px;
     border: solid 1px;
@@ -72,7 +72,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     border-radius: 10px;
     width: 200px;
     height: 35px;
@@ -120,7 +119,7 @@ body {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
 }
 
 .adjust-pass {
@@ -253,4 +252,10 @@ body {
     background-color: rgba(131, 131, 131, 0.158);
     border-radius: 10px;
 
+}
+
+.adjust-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

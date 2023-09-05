@@ -2,29 +2,30 @@ const inputPass = document.getElementById("inputPass")
 const inputPassConfirm = document.getElementById("inputPassConfirm")
 const form = document.getElementById("form")
 const contentTable = document.getElementById("contentTable")
+let inputName = document.getElementById("name")
+let inputNickname = document.getElementById("nickname")
+let inputAge = document.getElementById("age")
+
 let usersList = getUsers()
 let countId = usersList[usersList.length - 1].id
-let list = ''
 
-usersList.map(user => {
-    list += `<tr class="lines">
-     <td>${user.name}</td>
-     <td>${user.nickname}</td>
-     <td>${user.age}</td>
-     <td>${user.role}</td>
-     <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
-     </tr>`
-})
-
-contentTable.innerHTML = list
+createComponent(usersList)
 
 function saveUser() {
+
+    if (!verify()){
+        return
+    }
+
+    if (!verifyPass()){
+        return
+    }
+
     let name = document.getElementById("name").value
     let nickname = document.getElementById("nickname").value
     let age = document.getElementById("age").value
     let role = document.getElementById("role").value
     let status = document.getElementById("status").value
-
 
     countId = (countId + 1)
 
@@ -39,24 +40,74 @@ function saveUser() {
 
     usersList.unshift(newUsers)
 
+    createComponent(usersList)
+
+    reset()
+
+}
+
+function createComponent(users){
     let list = ''
 
-    usersList.map(user => {
+    users.map(user => {
         list += `<tr class="lines">
-     <td>${user.name}</td>
-     <td>${user.nickname}</td>
-     <td>${user.age}</td>
-     <td>${user.role}</td>
-     <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
-     </tr>`
+        <td>${user.name}</td>
+        <td>${user.nickname}</td>
+        <td>${user.age}</td>
+        <td>${user.role}</td>
+        <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
+        </tr>`
     })
 
     contentTable.innerHTML = list
-
-    event.preventDefault()
-
-
 }
+
+function verifyPass() {
+    let pass = document.getElementById("pass").value
+    let passConfirm = document.getElementById("passConfirm").value
+
+    const error = document.getElementById("errorPass")
+
+    if (pass != passConfirm) {
+        error.style.visibility = 'visible'
+        return false;
+    } else {
+        error.style.visibility = 'hidden'
+        return true;
+    }
+}
+
+function verify() {
+    let name = document.getElementById("name").value
+    let nickname = document.getElementById("nickname").value
+    let age = document.getElementById("age").value
+
+    switch (name) {
+        case "":
+            inputName.style.borderColor = 'red';
+            return false
+    }
+    switch (nickname) {
+        case "":
+            inputNickname.style.borderColor = 'red';
+            return false
+    }
+    switch (age) {
+        case "":
+            inputAge.style.borderColor = 'red';
+            return false
+    }
+
+    return true
+}
+
+function reset(){
+    inputName.value = ""
+    inputNickname.value = ""
+    inputAge.value = ""
+}
+
+
 
 function verifyRole() {
     let role = document.getElementById("role")
@@ -66,13 +117,13 @@ function verifyRole() {
 
 
     if (roleValue == "Admin") {
-        form.style.height = "430px"
+        // form.style.height = "430px"
         inputPass.style.visibility = 'visible'
         inputPassConfirm.style.visibility = 'visible'
         pass.setAttribute('required', 'true')
         passConfirm.setAttribute('required', 'true')
     } else {
-        form.style.height = "400px"
+        // form.style.height = "400px"
         inputPass.style.visibility = 'hidden'
         inputPassConfirm.style.visibility = 'hidden'
         pass.removeAttribute('required')
@@ -82,25 +133,11 @@ function verifyRole() {
 
 }
 
-function verifyPass() {
-
-    let pass = document.getElementById("pass").value
-    let passConfirm = document.getElementById("passConfirm").value
-    const error = document.getElementById("errorPass")
-
-    if (pass != passConfirm) {
-        error.style.visibility = 'visible'
-        return false;
-    }
-    error.style.visibility = 'hidden'
-    return true;
-
-}
 
 function filter() {
     let filter = document.getElementById("filter").value
 
-    if (filter == "Ativo"){
+    if (filter == "Ativo") {
 
         console.log(filter)
 
@@ -118,10 +155,10 @@ function filter() {
          <td><div class="switch"><input class="checkbox" type="checkbox" ${user.status === 'Ativo' ? 'checked' : ''}></input><span class="background"</span></div></td>
          </tr>`
         })
-    
+
         contentTable.innerHTML = list
-        
-    } else if (filter == "Inativo"){
+
+    } else if (filter == "Inativo") {
 
         console.log(filter)
 
